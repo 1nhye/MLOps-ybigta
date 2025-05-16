@@ -1,4 +1,5 @@
 import json, time, requests, os
+from data.schemas.models import BTCcandle
 from kafka import KafkaProducer
 
 producer = KafkaProducer(
@@ -6,7 +7,7 @@ producer = KafkaProducer(
     value_serializer=lambda v: json.dumps(v).encode("utf-8")
 )
 
-def fetch_btc_minute_candle():
+def fetch_btc_minute_candle() -> BTCcandle:
     url = "https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1m&limit=1"
     r = requests.get(url)
     kline = r.json()[0]
