@@ -5,8 +5,7 @@ COPY model_store/ /home/model-server/model-store/
 COPY config.properties /home/model-server/
 
 # TorchServe 실행
-CMD ["torchserve", 
-     "--start", 
-     "--model-store", "/home/model-server/model-store", 
-     "--models", "stock_predictor=stock_predictor.mar", 
+CMD ["torchserve", "--start", \
+     "--model-store", "/home/model-server/model-store", \
+     "--models", "stock_predictor=stock_predictor.mar", \
      "--ts-config", "/home/model-server/config.properties"]
