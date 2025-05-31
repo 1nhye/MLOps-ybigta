@@ -1,16 +1,49 @@
-## AWS Lambda
+# AWS Lambda & EventBridge Setup Guide
 
-1. Click button `Create function`
-![png](../assets/lambda/lambda-function.png)
+This guide explains how to set up AWS Lambda functions and EventBridge to build an automated MLOps pipeline.
 
-2. Lambda Code source
-![png](../assets/lambda/lambda-code.png)
-- Copy `signal.py` and paste to `Code source`
-- Click button `Deploy` (or Ctrl+Shift+U)
+## 📋 Table of Contents
 
-3. IAM > Access management > Roles > Create role
-![png](../assets/lambda/lambda-IAM.png)
-```bash
+- [AWS Lambda Setup](#aws-lambda-setup)
+- [IAM Role Creation](#iam-role-creation)
+- [Lambda Layer Addition](#lambda-layer-addition)
+- [AWS EventBridge Setup](#aws-eventbridge-setup)
+
+---
+
+## 🚀 AWS Lambda Setup
+
+### 1. Create Lambda Function
+
+1. Click the **"Create function"** button in the AWS Lambda console.
+
+   ![Lambda Function Creation](../assets/lambda/lambda-function.png)
+
+### 2. Deploy Code
+
+1. Navigate to the **Code source** section of your Lambda function.
+
+   ![Lambda Code](../assets/lambda/lambda-code.png)
+
+2. Copy the contents of the `signal.py` file and paste it into the Code source.
+3. Click the **"Deploy"** button or press `Ctrl+Shift+U` to deploy.
+
+---
+
+## 🔐 IAM Role Creation
+
+### 1. IAM Role Setup
+
+1. Navigate to **IAM > Access management > Roles**.
+2. Click the **"Create role"** button.
+
+   ![Lambda IAM](../assets/lambda/lambda-IAM.png)
+
+### 2. Permission Policy Configuration
+
+Use the following JSON policy to set up the required permissions:
+
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -63,29 +96,55 @@
   ]
 }
 ```
-4. In your EC2 (or in linux environment)
+
+> ⚠️ **Warning**: Replace `<YOUR_REGION>`, `<LAMBDA_FUNCTION_NAME>`, and `<SAGEMAKER_OUTPUT>` with actual values.
+
+---
+
+## 📦 Lambda Layer Addition
+
+### 1. Create Pandas Layer (In EC2 or Linux environment)
 
 ```bash
 mkdir python
 pip install pandas -t python/
 zip -r pandas_layer.zip python
 ```
-- Click button `Add a layer` in `Layers`
-- AWS layers: `AWSSDKPandas-Python313` > Add
 
-5. Edit Configuration
-![png](../assets/lambda/lambda-configuration.png)
+### 2. Add Layer
 
-## AWS Eventbridge
+1. Click the **"Add a layer"** button in the **Layers** section of your Lambda function.
+2. Select `AWSSDKPandas-Python313` from **AWS layers** and click **Add**.
 
-1. Register
-![png](../assets/eventbridge/eventbridge-schedule.png)
-![png](../assets/eventbridge/eventbridge-cron.png)
+### 3. Edit Configuration
 
-CRON: 0 / 0,4,8,12,16,20 / * / * / ? / *
+Edit the Lambda function configuration as needed.
 
-2. Register IAM Role
-```bash
+![Lambda Configuration](../assets/lambda/lambda-configuration.png)
+
+---
+
+## ⏰ AWS EventBridge Setup
+
+### 1. Schedule Registration
+
+1. Create a new schedule in the EventBridge console.
+
+   ![EventBridge Schedule](../assets/eventbridge/eventbridge-schedule.png)
+
+2. Set up the CRON expression.
+
+   ![EventBridge CRON](../assets/eventbridge/eventbridge-cron.png)
+
+   **CRON Expression**: `0 0,4,8,12,16,20 * * ? *`
+   
+   > 📅 This expression runs daily at 0:00, 4:00, 8:00, 12:00, 16:00, and 20:00.
+
+### 2. EventBridge IAM Role Registration
+
+Set up the following policy to allow EventBridge to invoke Lambda functions:
+
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -102,3 +161,17 @@ CRON: 0 / 0,4,8,12,16,20 / * / * / ? / *
     ]
 }
 ```
+
+> ⚠️ **Warning**: Replace `<YOUR_REGION>` and `<LAMBDA_FUNCTION>` with actual values.
+
+---
+
+## 🎯 Complete!
+
+Your AWS Lambda function will now automatically execute according to the EventBridge schedule to manage your MLOps pipeline.
+
+### Next Steps
+
+- Monitor Lambda function execution logs in CloudWatch Logs.
+- Adjust the schedule as needed.
+- Consider setting up error handling and notifications.
