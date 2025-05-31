@@ -10,7 +10,6 @@
 
 3. IAM > Access management > Roles > Create role
 ![png](../assets/lambda/lambda-IAM.png)
-
 ```bash
 {
   "Version": "2012-10-17",
@@ -81,7 +80,6 @@ zip -r pandas_layer.zip python
 
 1. Register
 ![png](../assets/eventbridge/eventbridge-schedule.png)
-
 ![png](../assets/eventbridge/eventbridge-cron.png)
 
 CRON: 0 / 0,4,8,12,16,20 / * / * / ? / *
