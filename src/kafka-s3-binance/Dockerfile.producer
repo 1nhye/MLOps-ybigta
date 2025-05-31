@@ -1,0 +1,15 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+# 필요한 패키지 설치
+RUN pip install kafka-python requests
+
+# producer 스크립트 복사
+COPY producer.py .
+
+# 환경 변수 설정
+ENV KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+
+# producer 실행
+CMD ["python", "producer.py"] 
