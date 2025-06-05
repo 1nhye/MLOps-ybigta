@@ -2,15 +2,6 @@
 
 This guide explains how to set up AWS Lambda functions and EventBridge to build an automated MLOps pipeline.
 
-## 📋 Table of Contents
-
-- [AWS Lambda Setup](#aws-lambda-setup)
-- [IAM Role Creation](#iam-role-creation)
-- [Lambda Layer Addition](#lambda-layer-addition)
-- [AWS EventBridge Setup](#aws-eventbridge-setup)
-
----
-
 ## 🚀 AWS Lambda Setup
 
 ### 1. Create Lambda Function
