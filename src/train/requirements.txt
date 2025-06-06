@@ -1,0 +1,6 @@
+boto3
+mlflow
+torch
+python-dotenv
+numpy
+pandas
