@@ -7,7 +7,7 @@ from inference import load_model, run_inference
 
 app = FastAPI()
 
-ONNX_MODEL_PATH = "onnx/models/model.onnx"
+ONNX_MODEL_PATH = "models/model.onnx"
 
 @app.post("/upload_model")
 async def upload_model(file: UploadFile = File(...)):
