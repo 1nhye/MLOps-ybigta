@@ -3,9 +3,10 @@ from fastapi.staticfiles import StaticFiles
 import requests
 
 app = FastAPI()
-app.mount("/", StaticFiles(directory="web", html=True), name="static")
+app.mount("/static", StaticFiles(directory="web", html=True), name="static")
 
-ONNX_SERVER_URL = "http://onnx-server:8000/predict" 
+#ONNX_SERVER_URL = "http://onnx-server:8000/predict" 
+ONNX_SERVER_URL = "http://127.0.0.1:8000/predict"
 
 @app.post("/predict")
 async def predict(request: Request):
