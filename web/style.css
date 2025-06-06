@@ -1,13 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    font-family: sans-serif;
-    margin: 2em;
+    font-family: 'Roboto', sans-serif;
+    background: #f5f6fa;
+    color: #2f3640;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
 }
 
 h1 {
-    color: #333;
+    color: #2f3640;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
 }
 
-#result {
-    margin-top: 1em;
-    font-weight: bold;
+main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.chart-card {
+    grid-column: 1 / -1;
+    height: 400px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    background: #4834d4;
+    color: white;
+    padding: 1.5rem;
+}
+
+.card-header h2 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.card-body {
+    padding: 2rem;
+    text-align: center;
+}
+
+.chart-card .card-body {
+    padding: 1rem;
+    height: calc(100% - 4rem);
+}
+
+.price, .prediction, .date {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2f3640;
+}
+
+.price {
+    color: #00b894;
+}
+
+.prediction {
+    color: #0984e3;
+}
+
+.date {
+    color: #6c5ce7;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-card {
+        height: 300px;
+    }
 }

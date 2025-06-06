@@ -3,16 +3,56 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>비트코인 대시보드</title>
     <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
-    <h1>비트코인 실시간 대시보드</h1>
-    <div>
-        <h2>실시간 비트코인 가격: <span id="btc-price">-</span></h2>
-        <h2>예측값: <span id="prediction">-</span></h2>
-        <h2>모델 최신 학습일: <span id="last-trained">-</span></h2>
+    <div class="container">
+        <header>
+            <h1>비트코인 실시간 대시보드</h1>
+        </header>
+        
+        <main>
+            <div class="card chart-card">
+                <div class="card-header">
+                    <h2>비트코인 가격 차트 (3시간)</h2>
+                </div>
+                <div class="card-body">
+                    <canvas id="priceChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>실시간 비트코인 가격</h2>
+                </div>
+                <div class="card-body">
+                    <span id="btc-price" class="price">-</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>예측값</h2>
+                </div>
+                <div class="card-body">
+                    <span id="prediction" class="prediction">-</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>모델 최신 학습일</h2>
+                </div>
+                <div class="card-body">
+                    <span id="last-trained" class="date">-</span>
+                </div>
+            </div>
+        </main>
     </div>
     <script src="/static/app.js"></script>
 </body>
