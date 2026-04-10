@@ -1,4 +1,5 @@
 import json
+import os
 import boto3
 import pandas as pd
 from datetime import datetime, timedelta, timezone
@@ -9,7 +10,8 @@ now = datetime.now(KST)
 s3 = boto3.client('s3')
 # sagemaker = boto3.client('sagemaker')
 
-BUCKET_NAME = "YOUR_BUCKET_NAME"
+# Terraform이 환경변수로 주입 (terraform/modules/lambda/main.tf 참고)
+BUCKET_NAME = os.environ.get("BUCKET_NAME", "ybigta-crypto-price")
 PREFIX = f'topics/btc_1m_kline_structured/{now.strftime("%Y-%m-%d")}/'
 print(PREFIX)
 #TODO
